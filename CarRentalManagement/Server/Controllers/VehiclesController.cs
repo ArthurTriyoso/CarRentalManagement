@@ -34,9 +34,9 @@ namespace CarRentalManagement.Server.Controllers
 		public async Task<IActionResult> GetVehicles()
 
 		{
-			var Vehicles = await _unitOfWork.Vehicles.GetAll();
-			//if (_context.Vehicles == null)
-			if (Vehicles == null)
+			var Vehicles = await _unitOfWork.Vehicles.GetAll(includes: q => q.Include(x => x.Make).Include(x => x.Model).Include(x => x.Colour));
+            //if (_context.Vehicles == null)
+            if (Vehicles == null)
 			{
 				return NotFound();
 			}
